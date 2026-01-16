@@ -222,21 +222,25 @@ export default function DataPipeline({ stage = 3 }: { stage?: number }) {
                         <AnimatePresence>
                             {/* Sources -> ETL */}
                             {showSources && (
-                                <>
+                                <motion.g key="sources-etl-group" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                                     <AnimatedPath from={{ x: 200, y: 110 }} to={{ x: 360, y: 250 }} delay={0.5} duration={2} showParticles={showMiddle} />
                                     <AnimatedPath from={{ x: 200, y: 250 }} to={{ x: 360, y: 250 }} delay={0.6} duration={2.2} showParticles={showMiddle} />
                                     <AnimatedPath from={{ x: 200, y: 390 }} to={{ x: 360, y: 250 }} delay={0.7} duration={2.4} showParticles={showMiddle} />
-                                </>
+                                </motion.g>
                             )}
 
                             {/* ETL -> Storage */}
                             {showMiddle && (
-                                <AnimatedPath from={{ x: 740, y: 250 }} to={{ x: 770, y: 250 }} delay={0.2} duration={1.5} showParticles={showOutput} />
+                                <motion.g key="etl-storage-group" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                                    <AnimatedPath from={{ x: 740, y: 250 }} to={{ x: 770, y: 250 }} delay={0.2} duration={1.5} showParticles={showOutput} />
+                                </motion.g>
                             )}
 
                             {/* Storage -> Output */}
                             {showOutput && (
-                                <AnimatedPath from={{ x: 930, y: 250 }} to={{ x: 1000, y: 250 }} delay={0.2} duration={1.5} showParticles />
+                                <motion.g key="storage-output-group" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                                    <AnimatedPath from={{ x: 930, y: 250 }} to={{ x: 1000, y: 250 }} delay={0.2} duration={1.5} showParticles />
+                                </motion.g>
                             )}
                         </AnimatePresence>
                     </svg>
